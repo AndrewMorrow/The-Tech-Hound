@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS ecommerce_db;
+CREATE DATABASE techHoundBlog_db;
