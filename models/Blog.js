@@ -18,7 +18,6 @@ Blog.init(
             validate: {
                 notEmpty: true,
                 len: [10, 80],
-                isAlphanumeric: true,
                 notNull: {
                     msg: "Please enter a title for the post",
                 },

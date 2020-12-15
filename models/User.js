@@ -19,13 +19,13 @@ User.init(
             allowNull: false,
             unique: true,
             validate: {
-                len: [4, 25],
+                notEmpty: true,
                 notNull: {
-                    msg: "Username must have at least 4 characters",
+                    msg: "Please enter a username at least 4 characters long.",
                 },
             },
         },
-        email: {
+        user_email: {
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,

@@ -40,7 +40,7 @@ app.use(function (err, req, res, next) {
 });
 
 // turn on connection to db and server
-sequelize.sync({ force: false }).then(() => {
+sequelize.sync({ alter: true }).then(() => {
     app.listen(PORT, () =>
         console.log(`Now listening at http://localhost:${PORT}`)
     );
