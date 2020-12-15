@@ -12,6 +12,7 @@ User.init(
         user_id: {
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV4,
+            unique: true,
         },
         user_name: {
             type: DataTypes.STRING(25),
