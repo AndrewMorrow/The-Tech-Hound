@@ -1,14 +1,21 @@
 const User = require("./User");
 const Blog = require("./Blog");
+const { DataTypes } = require("sequelize");
 
-Blog.belongsTo(User, {
-    foreignKey: "blog_user",
-});
+// Blog.belongsTo(User, {
+//     foreignKey: {
+//         name: "blog_user",
+//         type: DataTypes.UUID,
+//     },
+// });
 
-User.hasMany(Blog, {
-    foreignKey: "blog_user",
-    onDelete: "CASCADE",
-});
+// User.hasMany(Blog, {
+//     foreignKey: {
+//         name: "blog_user",
+//         type: DataTypes.UUID,
+//     },
+//     onDelete: "CASCADE",
+// });
 
 module.exports = {
     User,

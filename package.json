@@ -3,7 +3,8 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "node server.js"
+        "start": "node server.js",
+        "seed": "node ./seeders/index"
     },
     "dependencies": {
         "bcrypt": "^5.0.0",

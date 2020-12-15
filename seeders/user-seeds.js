@@ -14,6 +14,7 @@ const userData = [
 ];
 
 const seedUsers = () => {
+    console.log("user seeding");
     User.bulkCreate(userData);
 };
 

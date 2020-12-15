@@ -38,7 +38,7 @@ Blog.init(
         },
 
         blog_user: {
-            type: DataTypes.STRING,
+            type: DataTypes.UUID,
             allowNull: false,
             references: {
                 model: "user",
