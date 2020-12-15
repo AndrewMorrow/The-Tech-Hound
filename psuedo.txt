@@ -1,0 +1,78 @@
+(Model) =>User attributes(
+    
+    user_id: {
+            type: DataTypes.UUID,
+            defaultValue: Sequelize.UUIDV4,
+        },
+        
+        user_name:{ type: DataTypes.STRING(25),
+        allowNull: false,
+        unique: true,
+        validate: {
+            len: [4, 25],
+            notNull: {
+                msg: "Username must have at least 4 characters",
+            },
+        },
+    },
+    
+        email:{ type: DataTypes.STRING,
+        allowNull:false,
+        unique: true,
+        validate: {
+            isEmail: true,
+            notEmpty: true,
+            notNull: {
+                msg: "Please enter a valid email.",
+            },
+        },
+
+    },
+    
+        user_password:{ type: DataTypes.STRING(35),
+        allowNull:false,
+        validate: {
+            len: [8, 35],
+            notEmpty: true,
+        },
+    },
+    });
+
+
+
+(Model) =>Blog attributes(
+    
+        blog_title:{ type: DataTypes.STRING(80),
+        allowNull:false,
+        validate: {
+            notEmpty: true,
+            len: [10,80],
+            isAlphanumeric: true,
+            notNull:{
+                msg: "Please enter a title for the post",
+            },
+        },
+    },
+    
+        blog_body:{ type: DataTypes.STRING(400),
+        allowNull:false,
+        validate: {
+            notEmpty: true,
+            len: [10, 400],
+            notNull:{
+                msg: "Please enter a body for the post",
+            },
+        },
+    },
+    
+        blog_user:{ type: DataTypes.STRING,
+        allowNull:false,
+        references: {
+            model: "user",
+            key: "user_name"
+        },
+        validate: {
+            notEmpty: true,
+        },
+    },
+    );
