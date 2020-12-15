@@ -10,9 +10,6 @@ const sequelize = process.env.JAWSDB_URL
           {
               host: process.env.DB_HOST,
               dialect: process.env.DB_DIALECT,
-              dialectOptions: {
-                  decimalNumbers: true,
-              },
           }
       );
 

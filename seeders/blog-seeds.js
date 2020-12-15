@@ -19,4 +19,4 @@ const seedBlogs = () => {
     Blog.bulkCreate(blogData);
 };
 
-module.exports = seedBlogs;
+// module.exports = seedBlogs;

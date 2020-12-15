@@ -3,19 +3,21 @@ const express = require("express");
 const path = require("path");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
-const routes = require("./routes");
+const routes = require("./controllers");
 const PORT = process.env.PORT || 3001;
 const sequelize = require("./config/connection");
+const exphbs = require("express-handlebars");
 
 const app = express();
+const hbs = exphbs.create();
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "hbs");
+app.engine("handlebars", hbs.engine);
+app.set("view engine", "handlebars");
 
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
