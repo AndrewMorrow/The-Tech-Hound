@@ -13,9 +13,5 @@ const userData = [
     },
 ];
 
-const seedUsers = () => {
-    console.log("user seeding");
-    User.bulkCreate(userData);
-};
-
+const seedUsers = () => User.bulkCreate(userData);
 module.exports = seedUsers;

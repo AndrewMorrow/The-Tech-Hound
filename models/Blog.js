@@ -37,11 +37,11 @@ Blog.init(
         },
 
         blog_user: {
-            type: DataTypes.UUID,
+            type: DataTypes.STRING,
             allowNull: false,
             references: {
                 model: "user",
-                key: "user_id",
+                key: "user_name",
             },
             validate: {
                 notEmpty: true,

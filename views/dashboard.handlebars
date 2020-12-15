@@ -1,0 +1,22 @@
+<section class="jumbotron mb-3">
+    <h2 class="m-3">Your blogs</h2>
+    <!-- Show each user blog post here -->
+    {{#each blogs}}
+    <article>
+        <div class="card mb-3">
+            <div class="d-flex card-header justify-content-between">
+                <h4>{{blog_title}}</h4>
+                <p>Posted on {{format_date createdAt}}</p>
+            </div>
+            <div class="card-body">
+                <p class="card-text">{{blog_body}}</p>
+            </div>
+        </div>
+    </article>
+    {{/each}}
+    <section class= "d-flex justify-content-center">
+    <div class="btn btn-dark">+ New Post</div>
+</section>
+</section>
+
+

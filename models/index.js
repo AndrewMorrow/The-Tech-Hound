@@ -5,14 +5,14 @@ const { DataTypes } = require("sequelize");
 Blog.belongsTo(User, {
     foreignKey: {
         name: "blog_user",
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
     },
 });
 
 User.hasMany(Blog, {
     foreignKey: {
         name: "blog_user",
-        type: DataTypes.UUID,
+        type: DataTypes.STRING,
     },
     onDelete: "CASCADE",
 });

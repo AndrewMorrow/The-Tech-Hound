@@ -7,9 +7,10 @@ const routes = require("./controllers");
 const PORT = process.env.PORT || 3001;
 const sequelize = require("./config/connection");
 const exphbs = require("express-handlebars");
+const helpers = require("./utils/helpers");
 
 const app = express();
-const hbs = exphbs.create();
+const hbs = exphbs.create({ helpers });
 
 // view engine setup
 app.engine("handlebars", hbs.engine);
@@ -40,7 +41,7 @@ app.use(function (err, req, res, next) {
 });
 
 // turn on connection to db and server
-sequelize.sync({ alter: true }).then(() => {
+sequelize.sync({ alter: false }).then(() => {
     app.listen(PORT, () =>
         console.log(`Now listening at http://localhost:${PORT}`)
     );

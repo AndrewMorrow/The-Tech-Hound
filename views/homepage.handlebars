@@ -1,8 +1,18 @@
 <section class="jumbotron">
-                <!-- place all blog posts here -->
-                <article>
-                    <div class="card">
-                        {{blogs}}
-                    </div>
-                </article>
-            </section>
+    <!-- place all blog posts here -->
+    {{#each blogs}}
+    <article>
+        <div class="card mb-3">
+            <div class="d-flex card-header justify-content-between">
+                <h4>{{blog_title}}</h4>
+                <p>Posted by: {{blog_user}} on {{format_date createdAt}} </p>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    {{blog_body}}
+                </p>
+            </div>
+        </div>
+    </article>
+    {{/each}}
+</section>
