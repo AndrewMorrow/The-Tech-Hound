@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
             include: [
                 {
                     model: User,
-                    attributes: ["user_name", "user_email"],
+                    attributes: ["user_name"],
                 },
             ],
         });
@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
 
         const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
 
-        // console.log(blogs);
+        console.log(blogs);
 
         res.render("homepage", {
             blogs,
@@ -28,12 +28,12 @@ router.get("/", async (req, res) => {
     }
 });
 
-router.get("/dashboard", async (req, res) => {
+router.get("/dashboard/:id", async (req, res) => {
     try {
         // get all blogs from db here
         const dbBlogData = await Blog.findAll({
             where: {
-                blog_user: "user1Yeah",
+                blog_userId: 1,
             },
         });
         // console.log(dbBlogData);
@@ -56,7 +56,7 @@ router.post("/create", async (req, res) => {
         const dbBlogData = await Blog.create({
             blog_title: req.body.blog_title,
             blog_body: req.body.blog_body,
-            blog_user: req.body.blog_user,
+            user_name: req.body.blog_user,
         });
         res.status(200).json(dbBlogData);
     } catch (err) {
@@ -77,6 +77,18 @@ router.put("/update/:id", async (req, res) => {
             { where: { blog_id: req.params.id } }
         );
         res.status(200).json(newBlogData);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+router.delete("/delete/:id", async (req, res) => {
+    try {
+        const delBlogData = await Blog.destroy({
+            where: { id: req.params.id },
+        });
+        res.status(200).json({ message: "Your blog has been deleted." });
     } catch (err) {
         console.log(err);
         res.status(500).json(err);

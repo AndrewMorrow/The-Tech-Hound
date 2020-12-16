@@ -7,11 +7,6 @@ class Blog extends Model {}
 
 Blog.init(
     {
-        blog_id: {
-            type: DataTypes.UUID,
-            defaultValue: Sequelize.UUIDV4,
-            unique: true,
-        },
         blog_title: {
             type: DataTypes.STRING(80),
             allowNull: false,
@@ -33,18 +28,6 @@ Blog.init(
                 notNull: {
                     msg: "Please enter a body for the post",
                 },
-            },
-        },
-
-        blog_user: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            references: {
-                model: "user",
-                key: "user_name",
-            },
-            validate: {
-                notEmpty: true,
             },
         },
     },

@@ -1,9 +1,23 @@
 const router = require("express").Router();
 
-const { User } = require("../../models");
+const { User, Blog } = require("../../models");
 
 router.get("/", async (req, res) => {
     try {
+        const dbUserData = await User.findAll({
+            include: [
+                {
+                    model: Blog,
+                    attributes: ["blog_title"],
+                },
+            ],
+        });
+        // console.log(dbBlogData);
+
+        const users = dbUserData.map((blog) => blog.get({ plain: true }));
+
+        console.log(users);
+
         console.log("The / route");
         res.status(200).render("homepage");
     } catch (err) {
