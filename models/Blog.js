@@ -7,6 +7,14 @@ class Blog extends Model {}
 
 Blog.init(
     {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: Sequelize.UUIDV4,
+            primaryKey: true,
+            validate: {
+                isUUID: true,
+            },
+        },
         blog_title: {
             type: DataTypes.STRING(80),
             allowNull: false,

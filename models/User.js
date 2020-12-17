@@ -9,6 +9,15 @@ class User extends Model {}
 // set up fields and rules for User model
 User.init(
     {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: Sequelize.UUIDV4,
+            allowNull: false,
+            primaryKey: true,
+            validate: {
+                isUUID: true,
+            },
+        },
         user_name: {
             type: DataTypes.STRING(25),
             allowNull: false,
@@ -18,18 +27,6 @@ User.init(
                 len: [4, 25],
                 notNull: {
                     msg: "Please enter a username of at least 4 characters.",
-                },
-            },
-        },
-        user_email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            unique: true,
-            validate: {
-                isEmail: true,
-                notEmpty: true,
-                notNull: {
-                    msg: "Please enter a valid email.",
                 },
             },
         },

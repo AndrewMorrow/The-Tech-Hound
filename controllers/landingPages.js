@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User, Blog } = require(".././models");
+const withAuth = require("../utils/auth");
 
 //           Home Page
 // Get all blogs from the database
@@ -14,6 +15,7 @@ router.get("/", async (req, res) => {
                 },
             ],
         });
+
         // console.log(dbBlogData);
 
         const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
@@ -31,7 +33,7 @@ router.get("/", async (req, res) => {
 
 //     Dashboard Landing Page
 // get all blogs for a specific user
-router.get("/dashboard/:id", async (req, res) => {
+router.get("/dashboard/:id", withAuth, async (req, res) => {
     try {
         // get all blogs from db here
         const dbBlogData = await Blog.findAll({
@@ -55,10 +57,10 @@ router.get("/dashboard/:id", async (req, res) => {
 // Login route
 router.get("/login", (req, res) => {
     // If the user is already logged in, redirect to the homepage
-    // if (req.session.loggedIn) {
-    //     res.redirect("/");
-    //     return;
-    // }
+    if (req.session.loggedIn) {
+        res.redirect("/");
+        return;
+    }
     // Otherwise, render the 'login' template
     res.render("login");
 });
@@ -66,10 +68,10 @@ router.get("/login", (req, res) => {
 // Login route
 router.get("/signup", (req, res) => {
     // If the user is already logged in, redirect to the homepage
-    // if (req.session.loggedIn) {
-    //     res.redirect("/");
-    //     return;
-    // }
+    if (req.session.loggedIn) {
+        res.redirect("/");
+        return;
+    }
     // Otherwise, render the 'login' template
     res.render("sign-up");
 });
