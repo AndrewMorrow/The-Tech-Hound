@@ -4,14 +4,14 @@ const { DataTypes } = require("Sequelize");
 
 Blog.belongsTo(User, {
     foreignKey: {
-        name: "blog_userId",
+        name: "blog_user_id",
         allowNull: false,
     },
 });
 
 User.hasMany(Blog, {
     foreignKey: {
-        name: "blog_userId",
+        name: "blog_user_id",
         onDelete: "CASCADE",
     },
 });

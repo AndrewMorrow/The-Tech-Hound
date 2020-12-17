@@ -17,7 +17,7 @@ User.init(
                 notEmpty: true,
                 len: [4, 25],
                 notNull: {
-                    msg: "Please enter a username at least 4 characters long.",
+                    msg: "Please enter a username of at least 4 characters.",
                 },
             },
         },

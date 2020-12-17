@@ -2,61 +2,13 @@ const router = require("express").Router();
 
 const { Blog, User } = require("../../models");
 
-router.get("/", async (req, res) => {
-    try {
-        // get all blogs from db here
-        const dbBlogData = await Blog.findAll({
-            include: [
-                {
-                    model: User,
-                    attributes: ["user_name"],
-                },
-            ],
-        });
-        // console.log(dbBlogData);
-
-        const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
-
-        console.log(blogs);
-
-        res.render("homepage", {
-            blogs,
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
-router.get("/dashboard/:id", async (req, res) => {
-    try {
-        // get all blogs from db here
-        const dbBlogData = await Blog.findAll({
-            where: {
-                blog_userId: 1,
-            },
-        });
-        // console.log(dbBlogData);
-
-        const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
-
-        // console.log(blogs);
-
-        res.render("dashboard", {
-            blogs,
-        });
-    } catch (err) {
-        console.log(err);
-        res.status(500).json(err);
-    }
-});
-
+// create a new blog post
 router.post("/create", async (req, res) => {
     try {
         const dbBlogData = await Blog.create({
             blog_title: req.body.blog_title,
             blog_body: req.body.blog_body,
-            user_name: req.body.blog_user,
+            blog_user_id: req.body.blog_user_id,
         });
         res.status(200).json(dbBlogData);
     } catch (err) {
@@ -72,9 +24,8 @@ router.put("/update/:id", async (req, res) => {
             {
                 blog_title: req.body.blog_title,
                 blog_body: req.body.blog_body,
-                blog_user: req.body.blog_user,
             },
-            { where: { blog_id: req.params.id } }
+            { where: { id: req.params.id } }
         );
         res.status(200).json(newBlogData);
     } catch (err) {
@@ -88,7 +39,7 @@ router.delete("/delete/:id", async (req, res) => {
         const delBlogData = await Blog.destroy({
             where: { id: req.params.id },
         });
-        res.status(200).json({ message: "Your blog has been deleted." });
+        res.status(200).json(delBlogData);
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
