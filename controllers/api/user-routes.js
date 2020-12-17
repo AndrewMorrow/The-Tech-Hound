@@ -1,5 +1,5 @@
 const router = require("express").Router();
-
+const bcrypt = require("bcrypt");
 const { User } = require("../../models");
 
 // create a new user
@@ -36,7 +36,10 @@ router.post("/login", async (req, res) => {
             return;
         }
 
-        const validPassword = await dbUserData.checkPassword(req.body.password);
+        const validPassword = await bcrypt.compare(
+            req.body.password,
+            dbUserData.user_password
+        );
 
         if (!validPassword) {
             res.status(400).json({
