@@ -25,7 +25,7 @@ router.post("/login", async (req, res) => {
     try {
         const dbUserData = await User.findOne({
             where: {
-                user_name: req.body.username,
+                user_name: req.body.user_name,
             },
         });
 
@@ -37,7 +37,7 @@ router.post("/login", async (req, res) => {
         }
 
         const validPassword = await bcrypt.compare(
-            req.body.password,
+            req.body.user_password,
             dbUserData.user_password
         );
 

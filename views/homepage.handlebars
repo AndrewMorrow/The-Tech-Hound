@@ -1,18 +1,20 @@
-<section class="jumbotron">
-    <!-- place all blog posts here -->
-    {{#each blogs}}
-    <article>
-        <div class="card mb-3">
-            <div class="d-flex card-header justify-content-between">
-                <h4>{{blog_title}}</h4>
-                <p>Posted by: {{user.user_name}} on {{format_date createdAt}} </p>
+<main class= "container">
+    <section class="jumbotron">
+        <!-- place all blog posts here -->
+        {{#each blogs}}
+        <article>
+            <div class="card mb-3">
+                <div class="d-flex card-header justify-content-between">
+                    <h4>{{blog_title}}</h4>
+                    <p>Posted by: {{user.user_name}} on {{format_date createdAt}} </p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">
+                        {{blog_body}}
+                    </p>
+                </div>
             </div>
-            <div class="card-body">
-                <p class="card-text">
-                    {{blog_body}}
-                </p>
-            </div>
-        </div>
-    </article>
-    {{/each}}
-</section>
+        </article>
+        {{/each}}
+    </section>
+</main>
