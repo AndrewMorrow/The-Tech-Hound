@@ -2,6 +2,7 @@
 const { Model, DataTypes, Sequelize, UUIDV4 } = require("sequelize");
 // import our database connection from config.js
 const sequelize = require("../config/connection");
+const bcrypt = require("bcrypt");
 
 // Initialize User model (table) by extending off Sequelize's Model class
 class User extends Model {}
@@ -14,9 +15,6 @@ User.init(
             defaultValue: Sequelize.UUIDV4,
             allowNull: false,
             primaryKey: true,
-            validate: {
-                isUUID: true,
-            },
         },
         user_name: {
             type: DataTypes.STRING(25),
@@ -32,15 +30,32 @@ User.init(
         },
 
         user_password: {
-            type: DataTypes.STRING(35),
+            type: DataTypes.STRING,
             allowNull: false,
             validate: {
-                len: [8, 35],
+                len: [8],
                 notEmpty: true,
             },
         },
     },
     {
+        hooks: {
+            beforeCreate: async (newUserData) => {
+                newUserData.user_password = await bcrypt.hash(
+                    newUserData.user_password,
+                    10
+                );
+                return newUserData;
+            },
+            beforeUpdate: async (updatedUserData) => {
+                updatedUserData.user_password = await bcrypt.hash(
+                    updatedUserData.user_password,
+                    10
+                );
+                return updatedUserData;
+            },
+        },
+
         sequelize,
         timestamps: false,
         freezeTableName: true,
