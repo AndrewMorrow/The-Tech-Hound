@@ -1,6 +1,7 @@
 <main class= "container">
     <section class="jumbotron mb-3">
         <h2 class="m-3">Your blogs</h2>
+        {{#if blogs.length}}
         <!-- Show each user blog post here -->
         {{#each blogs}}
         <article>
@@ -15,10 +16,16 @@
             </div>
         </article>
         {{/each}}
+        {{else}}
+        <p> You have no blog posts.</p>
+
+        {{/if}}
+        
         <section class= "d-flex justify-content-center">
-        <div class="btn btn-dark">+ New Post</div>
+        <button id="new-post-btn" class="btn btn-dark">+ New Post</button>
     </section>
     </section>
 </main>
-
+{{> bootstrap-cdn}}
+<script src="javascripts/dashboard.js"></script>
 

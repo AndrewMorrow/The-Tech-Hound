@@ -11,7 +11,7 @@
                             <label for="usernameField" class="form-label">Username</label>
                             <input
                                 class="form-control"
-                                id="newUsername"
+                                id="new-username"
                                 aria-describedby="Username Field"
                             />
                         </div>
@@ -19,10 +19,10 @@
                             <label for="passwordField" class="form-label"
                                 >Password</label
                             >
-                            <input class="form-control" id="newPassword" />
+                            <input class="form-control" id="new-user-password" />
                         </div>
                         {{!-- when clicked will take them to create user route --}}
-                        <button type="submit" class="btn btn-primary mr-3">
+                        <button id="signup-btn" type="submit" class="btn btn-primary mr-3">
                             Sign Up
                         </button>
                         <a href="/login">Login instead</a>
@@ -32,3 +32,5 @@
         </article>
     </section>
 </main>
+{{> bootstrap-cdn}}
+<script src="/javascripts/signup.js"></script>

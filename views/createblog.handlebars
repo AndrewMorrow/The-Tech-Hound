@@ -1,0 +1,34 @@
+<main class= "container">
+    <section class="jumbotron">
+        <article>
+            <div class="card mb-3">
+                <div>
+                    <h4 class="card-header">Create Blog</h4>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="Blog Title Field" class="form-label">Title</label>
+                            <input
+                                class="form-control"
+                                id="blog-title"
+                                aria-describedby="Title Field"
+                            />
+                        </div>
+                        <div class="mb-3">
+                            <label for="Blog body Field" class="form-label"
+                                >Body</label
+                            >
+                            <textarea class="form-control" id="blog-body" ></textarea>
+                        </div>
+                        <button id="post-blog-btn" type="submit" class="btn btn-primary mr-3">
+                            Post Blog
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </article>
+    </section>
+</main>
+{{> bootstrap-cdn}}
+<script src="javascripts/createBlog.js"></script>

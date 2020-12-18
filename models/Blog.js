@@ -11,9 +11,6 @@ Blog.init(
             type: DataTypes.UUID,
             defaultValue: Sequelize.UUIDV4,
             primaryKey: true,
-            validate: {
-                isUUID: true,
-            },
         },
         blog_title: {
             type: DataTypes.STRING(80),

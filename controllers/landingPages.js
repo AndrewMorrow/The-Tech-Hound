@@ -24,6 +24,7 @@ router.get("/", async (req, res) => {
 
         res.render("homepage", {
             blogs,
+            logged_in: req.session.loggedIn,
         });
     } catch (err) {
         console.log(err);
@@ -33,21 +34,39 @@ router.get("/", async (req, res) => {
 
 //     Dashboard Landing Page
 // get all blogs for a specific user
-router.get("/dashboard/:id", withAuth, async (req, res) => {
+router.get("/dashboard", withAuth, async (req, res) => {
     try {
         // get all blogs from db here
-        const dbBlogData = await Blog.findAll({
-            where: { blog_user_id: req.params.id },
+        const dbUserData = await User.findByPk(req.session.user_id, {
+            attributes: { exclude: ["user_password"] },
+            include: [{ model: Blog }],
         });
+
         // console.log(dbBlogData);
 
-        const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
+        const userData = dbUserData.get({ plain: true });
 
         // console.log(blogs);
-
+        // console.log(userData);
+        // console.log(req.session.loggedIn);
         res.render("dashboard", {
-            blogs,
+            ...userData,
+            logged_in: req.session.loggedIn,
         });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// Create Page
+router.get("/createblog", (req, res) => {
+    try {
+        if (req.session.loggedIn) {
+            res.render("createblog", {
+                logged_in: req.session.loggedIn,
+            });
+        }
     } catch (err) {
         console.log(err);
         res.status(500).json(err);
@@ -62,7 +81,9 @@ router.get("/login", (req, res) => {
         return;
     }
     // Otherwise, render the 'login' template
-    res.render("login");
+    res.render("login", {
+        logged_in: req.session.loggedIn,
+    });
 });
 
 // Login route
@@ -72,7 +93,7 @@ router.get("/signup", (req, res) => {
         res.redirect("/");
         return;
     }
-    // Otherwise, render the 'login' template
+    // Otherwise, render the 'sign-up' template
     res.render("sign-up");
 });
 

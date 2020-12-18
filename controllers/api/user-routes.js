@@ -5,12 +5,11 @@ const { User } = require("../../models");
 // create a new user
 router.post("/create", async (req, res) => {
     try {
-        const dbUserData = await User.create({
-            user_name: req.body.user_name,
-            user_password: req.body.user_password,
-        });
+        // console.log(req.body);
+        const dbUserData = await User.create(req.body);
         // Set up sessions with a 'loggedIn' variable set to `true`
         req.session.save(() => {
+            req.session.user_id = dbUserData.id;
             req.session.loggedIn = true;
             res.status(200).json(dbUserData);
         });
@@ -29,27 +28,28 @@ router.post("/login", async (req, res) => {
             },
         });
 
+        // console.log(dbUserData);
         if (!dbUserData) {
             res.status(400).json({
-                message: "Incorrect username or password. Please try again!",
+                message: "Please check your credentials and try again!",
             });
             return;
         }
 
-        const validPassword = await bcrypt.compare(
-            req.body.user_password,
-            dbUserData.user_password
+        const validPassword = await dbUserData.checkPassword(
+            req.body.user_password
         );
 
         if (!validPassword) {
             res.status(400).json({
-                message: "Incorrect email or password. Please try again!",
+                message: "Please check your credentials and try again!",
             });
             return;
         }
 
         // Once the user successfully logs in, set up the sessions variable 'loggedIn'
         req.session.save(() => {
+            req.session.user_id = dbUserData.id;
             req.session.loggedIn = true;
 
             res.status(200).json({
@@ -59,7 +59,7 @@ router.post("/login", async (req, res) => {
         });
     } catch (err) {
         console.log(err);
-        res.status(500).json(err);
+        res.status(400).json(err);
     }
 });
 

@@ -1,8 +1,8 @@
 const createError = require("http-errors");
+require("dotenv").config();
 const express = require("express");
 const path = require("path");
-const cookieParser = require("cookie-parser");
-const logger = require("morgan");
+// const cookieParser = require("cookie-parser");
 const routes = require("./controllers");
 const PORT = process.env.PORT || 3001;
 const sequelize = require("./config/connection");
@@ -14,7 +14,7 @@ const app = express();
 const hbs = exphbs.create({ helpers });
 
 const sess = {
-    secret: "Super secret secret",
+    secret: `${process.env.SESS_SECRET}`,
     cookie: {},
     resave: false,
     saveUninitialized: true,
@@ -27,12 +27,11 @@ const sess = {
 app.engine("handlebars", hbs.engine);
 app.set("view engine", "handlebars");
 
-app.use(logger("dev"));
+app.use(session(sess));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
+// app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
-app.use(session(sess));
 
 app.use(routes);
 

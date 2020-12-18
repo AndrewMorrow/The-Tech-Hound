@@ -23,8 +23,12 @@
                         href="/"
                         >Home</a
                     >
-                    <a class="nav-link" href="/api/blog/dashboard">Dashboard</a>
-                    <a class="nav-link" href="/login">Login</a>
+                    <a class="nav-link" href="/dashboard">Dashboard</a>
+                    {{#if logged_in}}
+                    <a id="logout-btn" class="nav-link" href="/api/user/logout">Logout</a>
+                    {{else}}
+                    <a id="loginBtn" class="nav-link" href="/login">Login</a>
+                    {{/if}}
                 </div>
             </div>
             <a class="navbar-brand" href="#">The Tech Hound</a>
