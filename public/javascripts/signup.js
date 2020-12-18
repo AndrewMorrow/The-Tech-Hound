@@ -19,8 +19,6 @@ const createCredentials = async (e) => {
         user_password: $userPassword.val().trim(),
     };
 
-    // createUser(credentials);
-    // console.log(credentials);
     if (credentials.user_name && credentials.user_password) {
         const response = await fetch("/api/user/create", {
             method: "POST",

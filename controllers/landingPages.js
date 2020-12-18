@@ -13,10 +13,17 @@ router.get("/", async (req, res) => {
                     model: User,
                     attributes: ["user_name"],
                 },
+                { model: Comment },
+            ],
+            exclude: [
+                {
+                    model: User,
+                    attributes: ["user_password"],
+                },
             ],
         });
 
-        // console.log(dbBlogData);
+        console.log(dbBlogData);
 
         const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
 
