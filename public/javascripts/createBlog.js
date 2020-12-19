@@ -2,7 +2,7 @@ const $postBlogBtn = $("#post-blog-btn");
 const $newBlogBody = $("#blog-body");
 const $newBlogTitle = $("#blog-title");
 
-const createCredentials = async (e) => {
+const submitblogDetails = async (e) => {
     const blogDetails = {
         blog_title: $newBlogTitle.val(),
         blog_body: $newBlogBody.val(),
@@ -23,8 +23,8 @@ const createCredentials = async (e) => {
     }
 };
 
-// triggers when the signup button is clicked
-$postBlogBtn.on("click", createCredentials);
+// // triggers when the signup button is clicked
+// $postBlogBtn.on("click", createCredentials);
 
-// triggers when login button is clicked
+// // triggers when post blog button is clicked
 $postBlogBtn.on("click", submitblogDetails);

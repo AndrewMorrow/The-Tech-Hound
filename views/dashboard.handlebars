@@ -7,8 +7,9 @@
         <article>
             <div class="card mb-3">
                 <div class="d-flex card-header justify-content-between">
-                    <h4>{{blog_title}}</h4>
-                    <p>Posted on {{format_date createdAt}}</p>
+                    <h4 id="blog-title">{{blog_title}}</h4>
+                    <p id="blog-post-date">Posted on {{format_date createdAt}}</p>
+                    <p id="blog-update-date">Updated on {{format_date updatedAt}}</p>
                 </div>
                 <div class="card-body">
                     <p class="card-text">{{blog_body}}</p>

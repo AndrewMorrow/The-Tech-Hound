@@ -1,0 +1,61 @@
+<main class= "container">
+    <section class="jumbotron mb-3">
+        <h2 class="m-3">Leave a Comment</h2>
+        <!-- Show the blog post here -->
+        <article>
+            <div id="{{id}}" class="currentBlog card mb-3">
+                <div class="d-flex card-header justify-content-between">
+                    <h4>{{blog_title}}</h4>
+                    <p>Posted by: {{user.user_name}} on {{format_date createdAt}}</p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{blog_body}}</p>
+                </div>
+            </div>
+        </article>
+
+<article>
+            <div class="card mb-3">
+                <div>
+                    <h5 class="card-header">Leave a Comment</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="Comment body Field" class="form-label"
+                                >Body</label
+                            >
+                            <textarea class="form-control" id="comment-body" ></textarea>
+                        </div>
+                        <button id="post-comment-btn" type="submit" class="btn btn-primary mr-3">
+                            Post Comment
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </article>
+
+        {{#if comments.length}}
+        {{#each comments}}
+        <article>
+            <div class="card mb-3">
+                <div class="d-flex card-header justify-content-between">
+                    {{!-- <h4>{{comments.comment_user_name}}</h4> --}}
+                    <h5>Comment by: {{comment_user_name}} on {{format_date createdAt}}</h5>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{comment_body}}</p>
+                </div>
+            </div>
+        </article>
+        {{/each}}
+        {{else}}
+        <section class= "container">
+        <p class= "dflex justify-content-center">There are currently no comments for this post.</p>
+        </section>
+        {{/if}}
+
+    </section>
+</main>
+{{> bootstrap-cdn}}
+<script src="javascripts/createComment.js"></script>

@@ -34,12 +34,9 @@ Blog.hasMany(Comment, {
     },
 });
 
-User.hasMany(Comment, {
-    foreignKey: {
-        name: "comment_user_id",
-        type: DataTypes.UUID,
-        onDelete: "CASCADE",
-    },
+Comment.belongsTo(User, {
+    foreignKey: "comment_user_name",
+    targetKey: "user_name",
 });
 
 module.exports = {

@@ -76,3 +76,9 @@
         },
     },
     );
+
+
+
+    implement updating post on dashboard page
+    implement deleting post on dashboard page
+    implement site logout when idle

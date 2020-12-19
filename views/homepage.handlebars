@@ -1,10 +1,9 @@
 <main class= "container">
     <section class="jumbotron">
         <!-- place all blog posts here -->
-        
         {{#each blogs}}
         <article>
-            <div class="card mb-3">
+            <div id= "{{id}}"class="card mb-3 selectBlog">
                 <div class="d-flex card-header justify-content-between">
                     <h4>{{blog_title}}</h4>
                     <p>Posted by: {{user.user_name}} on {{format_date createdAt}} </p>
@@ -15,13 +14,8 @@
                     </p>
                 </div>
             </div>
-        </article>
-        
-        {{> new-comment}}
-        {{> existing-comments}}
-            
+        </article>       
         {{/each}}
-    
     </section>
 </main>
 {{> bootstrap-cdn}}

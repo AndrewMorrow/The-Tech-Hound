@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Blog } = require(".././models");
+const { User, Blog, Comment } = require(".././models");
 const withAuth = require("../utils/auth");
 
 //           Home Page
@@ -13,17 +13,10 @@ router.get("/", async (req, res) => {
                     model: User,
                     attributes: ["user_name"],
                 },
-                { model: Comment },
-            ],
-            exclude: [
-                {
-                    model: User,
-                    attributes: ["user_password"],
-                },
             ],
         });
 
-        console.log(dbBlogData);
+        // console.log(dbBlogData);
 
         const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
 
@@ -31,6 +24,34 @@ router.get("/", async (req, res) => {
 
         res.render("homepage", {
             blogs,
+            logged_in: req.session.loggedIn,
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// render comment page
+router.get("/comment/:id", async (req, res) => {
+    try {
+        // get all blogs from db here
+        const dbBlogData = await Blog.findByPk(req.params.id, {
+            include: [{ model: Comment }, { model: User }],
+            attributes: {
+                exclude: ["blog_user_id", "user_password"],
+            },
+        });
+
+        // console.log(dbBlogData);
+
+        const blogData = dbBlogData.get({ plain: true });
+
+        console.log(blogData);
+
+        // console.log(req.session.loggedIn);
+        res.render("comment-page", {
+            ...blogData,
             logged_in: req.session.loggedIn,
         });
     } catch (err) {
