@@ -4,7 +4,6 @@ const selectOneBlog = async function (e) {
     const blog_id = $(this).attr("id");
 
     document.location.replace(`/comment/${blog_id}`);
-    console.log("still running");
 
     // if (blog_id) {
     //     const response = await fetch("/api/comment", {

@@ -1,0 +1,19 @@
+<main class= "container">
+    <section class="jumbotron mb-3">
+        <h2 class="m-3">Update Your Post</h2>
+        <!-- Show the blog post here -->
+        <article>
+            <div id="{{id}}" class="currentBlog card mb-3">
+                <div class="d-flex card-header justify-content-between">
+                    <h4>{{blog_title}}</h4>
+                    <p>Posted by: {{user.user_name}} on {{format_date createdAt}}</p>
+                </div>
+                <div class="card-body">
+                    <p class="card-text">{{blog_body}}</p>
+                </div>
+            </div>
+        </article>
+    </section>
+</main>
+{{> bootstrap-cdn}}
+<script src="javascripts/updateBlog.js"></script>

@@ -37,9 +37,17 @@ router.get("/comment/:id", async (req, res) => {
     try {
         // get all blogs from db here
         const dbBlogData = await Blog.findByPk(req.params.id, {
-            include: [{ model: Comment }, { model: User }],
+            include: [
+                { model: Comment },
+                {
+                    model: User,
+                    attributes: {
+                        exclude: ["user_password"],
+                    },
+                },
+            ],
             attributes: {
-                exclude: ["blog_user_id", "user_password"],
+                exclude: ["blog_user_id"],
             },
         });
 
@@ -47,10 +55,37 @@ router.get("/comment/:id", async (req, res) => {
 
         const blogData = dbBlogData.get({ plain: true });
 
-        console.log(blogData);
+        // console.log(blogData);
 
         // console.log(req.session.loggedIn);
         res.render("comment-page", {
+            ...blogData,
+            logged_in: req.session.loggedIn,
+        });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
+// update blog by id
+router.get("/update/:id", async (req, res) => {
+    try {
+        // get all blogs from db here
+        const dbBlogData = await Blog.findByPk(req.params.id, {
+            attributes: {
+                exclude: ["blog_user_id"],
+            },
+        });
+
+        // console.log(dbBlogData);
+
+        const blogData = dbBlogData.get({ plain: true });
+
+        // console.log(blogData);
+
+        // console.log(req.session.loggedIn);
+        res.render("update-blog", {
             ...blogData,
             logged_in: req.session.loggedIn,
         });

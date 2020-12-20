@@ -5,7 +5,7 @@
         <!-- Show each user blog post here -->
         {{#each blogs}}
         <article>
-            <div class="card mb-3">
+            <div id="{{id}}" class="card mb-3">
                 <div class="d-flex card-header justify-content-between">
                     <h4 id="blog-title">{{blog_title}}</h4>
                     <p id="blog-post-date">Posted on {{format_date createdAt}}</p>
@@ -13,6 +13,10 @@
                 </div>
                 <div class="card-body">
                     <p class="card-text">{{blog_body}}</p>
+                </div>
+                <div class="card-footer">
+                    <button class= "update-post-btn btn btn-dark mr-3">Update Post</button>
+                    <button class= "delete-post-btn btn btn-danger">Delete Post</button>
                 </div>
             </div>
         </article>
