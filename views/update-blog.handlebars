@@ -4,12 +4,15 @@
         <!-- Show the blog post here -->
         <article>
             <div id="{{id}}" class="currentBlog card mb-3">
-                <div class="d-flex card-header justify-content-between">
-                    <h4>{{blog_title}}</h4>
-                    <p>Posted by: {{user.user_name}} on {{format_date createdAt}}</p>
+                <div class="d-flex flex-fill card-header justify-content-between">
+                    <input class="d-flex flex-fill mr-2 new-blog-title" type="text" value="{{blog_title}}">
+                    <p class= "d-flex">Posted on {{format_date createdAt}}</p>
                 </div>
-                <div class="card-body">
-                    <p class="card-text">{{blog_body}}</p>
+                <div class="d-flex flex-fill card-body">
+                    <textarea class="d-flex flex-fill card-text new-blog-body">{{blog_body}}</textarea>
+                </div>
+                <div class="card-footer">
+                    <button class="update-post-btn btn btn-primary">Update Post</button>
                 </div>
             </div>
         </article>
