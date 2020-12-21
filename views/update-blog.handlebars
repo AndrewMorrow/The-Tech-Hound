@@ -1,18 +1,34 @@
 <main class= "container">
-    <section class="jumbotron mb-3">
-        <h2 class="m-3">Update Your Post</h2>
-        <!-- Show the blog post here -->
+    <section class="jumbotron">
         <article>
-            <div id="{{id}}" class="currentBlog card mb-3">
-                <div class="d-flex flex-fill card-header justify-content-between">
-                    <input class="d-flex flex-fill mr-2 new-blog-title" type="text" value="{{blog_title}}">
-                    <p class= "d-flex">Posted on {{format_date createdAt}}</p>
+            <div  id="{{id}}" class="currentBlog card">
+                <div class="card-header d-flex justify-content-between">
+                    <h4 class="">Update your post</h4>
+                <p class= "">Posted on {{format_date createdAt}}</p>
                 </div>
-                <div class="d-flex flex-fill card-body">
-                    <textarea class="d-flex flex-fill card-text new-blog-body">{{blog_body}}</textarea>
-                </div>
-                <div class="card-footer">
-                    <button class="update-post-btn btn btn-primary">Update Post</button>
+                <div class="card-body">
+                    <form>
+                        <div class="mb-3">
+                            <label for="Blog Title Field" class="form-label">Title</label>
+                            <input
+                                class="form-control new-blog-title"
+                                id="blog-title"
+                                value="{{blog_title}}"
+                                aria-describedby="Title Field"
+                            />
+                            <div id="titleHelp" class="form-text">Requirements: 10 - 80 characters</div>
+                        </div>
+                        <div>
+                            <label for="Blog body Field" class="form-label"
+                                >Body</label
+                            >
+                            <textarea class="form-control new-blog-body" id="blog-body" >{{blog_body}}</textarea>
+                        </div>
+                        <div id="blogHelp" class="form-text mb-3">Requirements: 10 - 400 characters</div>
+                        <button type="submit" class="update-post-btn btn btn-primary mr-3">
+                            Update Post
+                        </button>
+                    </form>
                 </div>
             </div>
         </article>
@@ -20,3 +36,6 @@
 </main>
 {{> bootstrap-cdn}}
 <script src="javascripts/updateBlog.js"></script>
+
+
+

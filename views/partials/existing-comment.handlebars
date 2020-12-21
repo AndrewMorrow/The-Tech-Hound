@@ -8,3 +8,37 @@ for each comment --}}
        <section class= "d-flex justify-content-center"> --}}
        <a href="/createblog" id="new-post-btn" class="btn btn-dark">+ New Post</a> --}}
    </section>
+
+
+
+   <main class= "container">
+    <section class="jumbotron mb-3">
+        <h2 class="m-3">Update Your Post</h2>
+        <!-- Show the blog post here -->
+        <article>
+            <div id="{{id}}" class="currentBlog card">
+                <form >
+                    <div class=" card-header">
+                        <label for="Blog Title Field" class="form-label">Title</label>
+                        <p class= "">Posted on {{format_date createdAt}}</p>
+                        <input class="mr-2 form-control new-blog-title" type="text" value="{{blog_title}}">
+                        
+                    </div>
+                </form>
+                    <div class="card-body">
+                        <form class="d-flex">
+                        <label for="Blog body Field" class="form-label"
+                                >Body</label
+                            >
+                        <textarea class="d-flex flex-fill new-blog-body form-control">{{blog_body}}</textarea>
+                        <div id="blogHelp" class="form-text mb-3">Requirements: 10 - 400 characters</div>
+                    </div>
+                    
+                    <div class="card-footer">
+                        <button class="update-post-btn btn btn-primary">Update Post</button>
+                    </div>
+                </form>
+            </div>
+        </article>
+    </section>
+</main>
