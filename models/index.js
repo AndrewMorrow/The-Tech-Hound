@@ -1,7 +1,7 @@
 const User = require("./User");
 const Blog = require("./Blog");
 const Comment = require("./Comment");
-const { DataTypes } = require("Sequelize");
+const { DataTypes } = require("sequelize");
 
 Blog.belongsTo(User, {
     foreignKey: {
