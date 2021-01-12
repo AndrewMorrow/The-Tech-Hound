@@ -18,7 +18,7 @@ router.get("/", async (req, res) => {
 
         // console.log(dbBlogData);
 
-        const blogs = dbBlogData.map((blog) => blog.get({ plain: true }));
+        const blogs = await dbBlogData.map((blog) => blog.get({ plain: true }));
 
         // console.log(blogs);
 
@@ -53,7 +53,7 @@ router.get("/comment/:id", async (req, res) => {
 
         // console.log(dbBlogData);
 
-        const blogData = dbBlogData.get({ plain: true });
+        const blogData = await dbBlogData.get({ plain: true });
 
         // console.log(blogData);
 
@@ -80,7 +80,7 @@ router.get("/update/:id", async (req, res) => {
 
         // console.log(dbBlogData);
 
-        const blogData = dbBlogData.get({ plain: true });
+        const blogData = await dbBlogData.get({ plain: true });
 
         // console.log(blogData);
 
@@ -107,7 +107,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
 
         // console.log(dbBlogData);
 
-        const userData = dbUserData.get({ plain: true });
+        const userData = await dbUserData.get({ plain: true });
 
         // console.log(blogs);
         // console.log(userData);

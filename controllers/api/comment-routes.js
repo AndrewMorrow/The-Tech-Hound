@@ -10,7 +10,7 @@ router.post("/create", async (req, res) => {
             },
         });
 
-        const commentUser = dbUserData.get({ plain: true });
+        const commentUser = await dbUserData.get({ plain: true });
 
         const dbCommentData = await Comment.create({
             comment_body: req.body.comment_body,
